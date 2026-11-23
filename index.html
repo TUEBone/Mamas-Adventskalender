@@ -30,7 +30,21 @@ body:not(.inside) header,body:not(.inside) article>:not(#frame),body:not(.inside
 #days .leaf:after{display:none}
 #days button.opening{background:radial-gradient(ellipse,#fff0b7,#ae763f 52%,#6b4828 72%,transparent 76%)}
 #days button.opening .leaf{background:url(bethlehem.svg) var(--crop)/882.7% 2380.9% no-repeat;border-radius:38%}
-</style><main><header><b>✦ Adventsatelier</b><small>WINTER 2026</small><select id="world" aria-label="Kalender wählen"></select></header><article><small id="tag"></small><h1 id="title"></h1><p id="intro"></p><div id="frame"><div id="stage"><div id="scene"><canvas id="art" width="800" height="360" aria-label="Illustrierte Winterwelt"></canvas></div><div class="grid" id="days"></div></div></div><button id="back">Zurück zum Kalender</button><div id="panel" tabindex="-1"></div><div id="actions"></div><p id="msg" role="status"></p></article><div class="row"><h2>Dezember</h2><label><input type="checkbox" id="test"> Testmodus</label></div><footer><button id="music">♫ Musik einschalten</button> <span id="saved"></span></footer></main><script>
+
+#days .leaf svg{height:clamp(13px,1.95dvh,20px);max-width:70%;overflow:visible;fill:none;stroke:#89654ce6;stroke-width:1.03;stroke-linecap:round;stroke-linejoin:bevel;filter:drop-shadow(0 .55px .12px #ffe1a8cf)}
+.night{position:absolute;inset:0;pointer-events:none}
+.night i{position:absolute;display:block}
+.star-glow,.lamp-glow{translate:-50% -50%;border-radius:50%;mix-blend-mode:screen;animation:light-flicker var(--period) var(--offset) ease-in-out infinite alternate}
+.star-glow{width:2.2%;aspect-ratio:1;background:radial-gradient(circle,#fff7d9 2%,#ffe9b282 19%,transparent 68%)}
+.star-glow:first-child{width:13%;background:radial-gradient(circle,#fff2ca9e, #ffc47748 29%,transparent 70%)}
+.lamp-glow{width:6.5%;aspect-ratio:1;background:radial-gradient(ellipse,#fff6c7ab,#ffb35254 38%,transparent 70%)}
+.shooting-star{width:9%;height:1.5px;border-radius:60%;background:linear-gradient(90deg,#fff7d2,#ffedd796 22%,transparent);box-shadow:-3px 0 7px #ffe7b08c;opacity:0;animation:shoot 9s linear infinite}
+.shooting-star:nth-last-child(2){animation-delay:3s}
+.shooting-star:last-child{animation-delay:6s}
+@keyframes light-flicker{0%,100%{opacity:.18}25%{opacity:.69}33%{opacity:.38}58%{opacity:.8}73%{opacity:.32}}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(-22deg)}3%{opacity:.95}12%,100%{opacity:0;transform:translate(-260%,4.3dvh) rotate(-22deg)}}
+@media(prefers-reduced-motion:reduce){.night{display:none}}
+</style><main><header><b>✦ Adventsatelier</b><small>WINTER 2026</small><select id="world" aria-label="Kalender wählen"></select></header><article><small id="tag"></small><h1 id="title"></h1><p id="intro"></p><div id="frame"><div id="stage"><div id="scene"><canvas id="art" width="800" height="360" aria-label="Illustrierte Winterwelt"></canvas></div><div class="night" aria-hidden="true"></div><div class="grid" id="days"></div></div></div><button id="back">Zurück zum Kalender</button><div id="panel" tabindex="-1"></div><div id="actions"></div><p id="msg" role="status"></p></article><div class="row"><h2>Dezember</h2><label><input type="checkbox" id="test"> Testmodus</label></div><footer><button id="music">♫ Musik einschalten</button> <span id="saved"></span></footer></main><script>
 const worlds=[
 null,
 ['Christel','Das große Weihnachtsabenteuer','POSTAMT FÜR UMWEGE','Ein Nachtzug sammelt Wünsche ein, die jemand jahrelang auf später verschoben hat. Christel übernimmt kurzerhand die Reiseleitung.','Ein Fahrschein für einen Umweg','Auf Christels Küchentisch steht eine winzige Schaffnermütze. Darunter niest jemand. „Ihre Fahrkarte, bitte!“ Christel hebt die Mütze an. Eine Maus hält ihr zwei Billette hin.','Speisewagen wählen','Lokführerin besuchen','Im Speisewagen gewinnt Christel beim Teelöffelpoker einen Messinglöffel.','Die Lokführerin leiht Christel ihre Pfeife. „Einmal pfeifen heißt: Ich entscheide!“','Christel schlägt den Löffel gegen ihr Glas. Als alle zuhören, bestellt sie den ersten Halt direkt vor Sebastians Küche.','Christel pfeift. Der Zug hält vor Sebastians Küche. Emilia starrt aus dem Fenster. „Oma, fährst du den?“'],
@@ -97,7 +111,32 @@ async function returnToCalendar(){
 }
 $('back').onclick=returnToCalendar;
 
-const stones=[[408,1438,-6],[802,1320,-10],[124,746,3],[357,1317,-6],[646,1507,4],[174,1378,-8],[537,1278,-5],[122,545,4],[569,1346,4],[470,1182,-3],[716,1251,-7],[443,1562,-4],[123,645,4],[681,1439,5],[248,1194,5],[768,1559,-7],[396,1244,-3],[123,447,-2],[171,1534,-8],[825,1407,7],[477,608,8],[586,1208,-2],[148,1466,5],[122,374,-2]];
+const stones=[[408,1438,-6],[802,1320,-10],[124,746,3],[357,1317,-6],[646,1507,4],[850,530,-9],[537,1278,-5],[122,545,4],[569,1346,4],[470,1182,-3],[716,1251,-7],[443,1562,-4],[123,645,4],[859,659,7],[248,1194,5],[768,1559,-7],[396,1244,-3],[123,447,-2],[171,1534,-8],[848,820,-5],[477,608,8],[586,1208,-2],[148,1466,5],[122,374,-2]];
+const cuts=[
+ 'M6 1 L3 2 1 5 1.5 12 4 15 7 14 9 11 8.5 4 6 1',
+ 'M2 5 L5 2 5.3 9 5 15 M2 15 L8 15',
+ 'M1 4 L3 2 7 1.5 9 4 7 8 2 13 1 15 9 14.5',
+ 'M1 3 L4 1.5 8 2 8 5 5 8 8 9 9 12 7 15 3 15 1 13',
+ 'M6 1 L1 10 9 10 M7 4 L6.5 15',
+ 'M9 2 L2 2.5 1.5 8 6 7 9 10 8 13 5 15 1 13',
+ 'M8 2 L5 1.5 2 5 1 10 2 13 5 15 8 13 9 10 6 8 2 9',
+ 'M1 2 L9 1.5 6 8 3 15',
+ 'M5 8 L2 5 2 2.5 6 1.5 8 4 7 7 3 9 1 12 3 15 7 15 9 12 7 9 5 8',
+ 'M8 8 L4 9 1 6 2 3 5 1.5 8 3 9 7 7 12 4 15 2 14'
+];
+function engrave(day){
+  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
+  const digits=String(day);
+  svg.setAttribute('viewBox','0 0 '+(digits.length*11)+' 17');
+  svg.setAttribute('aria-hidden','true');
+  [...digits].forEach((digit,index)=>{
+    const path=document.createElementNS(ns,'path');
+    path.setAttribute('d',cuts[Number(digit)]);
+    path.setAttribute('transform','translate('+(index*11)+' 0)');
+    svg.append(path);
+  });
+  return svg;
+}
 function grid(){
   dayGrid.replaceChildren();
   stones.forEach(([x,y,angle],index)=>{
@@ -106,7 +145,7 @@ function grid(){
     button.setAttribute('aria-label','Türchen '+day);
     button.style.cssText='left:'+x/971*100+'%;top:'+y/1619*100+'%;--angle:'+angle+'deg;--crop:'+(x-55)/861*100+'% '+(y-34)/1551*100+'%';
     leaf.className='leaf';
-    leaf.textContent=day;
+    leaf.append(engrave(day));
     button.append(leaf);
     button.onclick=()=>openDoor(day);
     dayGrid.append(button);
@@ -120,4 +159,15 @@ const objects=[['Schlüssel','🗝️',73,54],['Brief','✉️',27,82],['Taschen
 function hunt(){clear();playing=true;found=[];hints=0;deadline=Date.now()+60000;panel('Das verlassene Atelier','Finde Schlüssel, Brief und Taschenuhr im Bild.');function tick(){let left=Math.ceil((deadline-Date.now())/1000);if(left<=0){clear();panel('Die Atelieruhr schlägt','Du kannst die Suche noch einmal beginnen.');act('Erneut suchen',hunt);return false}$('msg').textContent=left+' s · '+found.length+'/3 gefunden · '+hints+' Hinweise';return true}objects.forEach(([name,icon,x,y],i)=>{let b=document.createElement('button');b.textContent=icon;b.setAttribute('aria-label',name);b.style.left=x+'%';b.style.top=y+'%';b.dataset.obj=i;$('scene').append(b);b.onclick=()=>{if(!playing||!tick()||i>2||found.includes(i))return;found.push(i);b.hidden=true;if(found.length===3){let points=Math.max(0,300+Math.ceil((deadline-Date.now())/1000)*5-hints*50);finish('Unter dem Brief liegt eine Eintrittskarte für zwei. Deine erste Albumseite ist komplett. '+points+' Punkte.')}else tick()}});act('Hinweis · −50 Punkte',()=>{if(!tick())return;let b=[...document.querySelectorAll('#scene button')].slice(0,3).find(b=>!b.hidden);if(!b.classList.contains('hint')){b.classList.add('hint');hints++}tick()});clock=setInterval(tick,250);tick();$('scene').scrollIntoView({block:'center'})}
 worlds.forEach((d,i)=>{if(d&&(fixed===null||i===fixed))world.add(new Option(d[0],i))});world.onchange=()=>{w=Number(world.value);home()};$('test').onchange=home;
 $('music').onclick=async()=>{if(audio){clearInterval(musicTimer);await audio.close();audio=null;$('music').textContent='♫ Musik einschalten';return}audio=new (window.AudioContext||window.webkitAudioContext)();await audio.resume();let n=0;function note(){let o=audio.createOscillator(),g=audio.createGain(),t=audio.currentTime;o.frequency.value=[392,494,587,494,440,523,659,523][n++%8];g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.045,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+.7);o.connect(g);g.connect(audio.destination);o.start();o.stop(t+.72)}note();musicTimer=setInterval(note,750);$('music').textContent='♫ Musik ausschalten'};home();
+
+const night=document.querySelector('.night');
+function light(kind,x,y,index){
+  const glow=document.createElement('i');
+  glow.className=kind;
+  glow.style.cssText='left:'+x/971*100+'%;top:'+y/1619*100+'%;--offset:'+(index*.71)+'s;--period:'+(2.3+index%5*.63)+'s';
+  night.append(glow);
+}
+[[566,146],[682,78],[731,148],[629,213],[475,103],[410,63],[604,61],[782,75],[688,220],[745,199],[501,201],[361,103]].forEach(([x,y],i)=>light('star-glow',x,y,i));
+[[216,382],[447,736],[82,1300],[411,538],[488,555],[824,581]].forEach(([x,y],i)=>light('lamp-glow',x,y,i));
+[[708,58],[749,102],[661,76]].forEach(([x,y],i)=>light('shooting-star',x,y,i));
 </script></html>
