@@ -37,7 +37,9 @@ body:not(.inside) header,body:not(.inside) article>:not(#frame),body:not(.inside
 .star-glow,.lamp-glow{translate:-50% -50%;border-radius:50%;mix-blend-mode:screen;animation:light-flicker var(--period) var(--offset) ease-in-out infinite alternate}
 .star-glow{width:2.2%;aspect-ratio:1;background:radial-gradient(circle,#fff7d9 2%,#ffe9b282 19%,transparent 68%)}
 .star-glow:first-child{width:13%;background:radial-gradient(circle,#fff2ca9e, #ffc47748 29%,transparent 70%)}
-.lamp-glow{width:6.5%;aspect-ratio:1;background:radial-gradient(ellipse,#fff6c7ab,#ffb35254 38%,transparent 70%)}
+.lamp-glow{width:9%;aspect-ratio:1;background:radial-gradient(ellipse,#fff8d5ed,#ffba62a6 30%,#ff9e382e 52%,transparent 72%);animation:lantern-flicker calc(var(--period)*.62) calc(-1*var(--offset)) ease-in-out infinite}
+#days .small-engraving svg{height:clamp(10px,1.5dvh,15px)}
+@keyframes lantern-flicker{0%,100%{opacity:.78;scale:1}16%{opacity:.34;scale:.84}31%{opacity:1;scale:1.18}43%{opacity:.56;scale:.92}59%{opacity:.92;scale:1.12}78%{opacity:.4;scale:.87}90%{opacity:.86;scale:1.06}}
 .shooting-star{width:9%;height:1.5px;border-radius:60%;background:linear-gradient(90deg,#fff7d2,#ffedd796 22%,transparent);box-shadow:-3px 0 7px #ffe7b08c;opacity:0;animation:shoot 9s linear infinite}
 .shooting-star:nth-last-child(2){animation-delay:3s}
 .shooting-star:last-child{animation-delay:6s}
@@ -111,7 +113,7 @@ async function returnToCalendar(){
 }
 $('back').onclick=returnToCalendar;
 
-const stones=[[408,1438,-6],[802,1320,-10],[124,746,3],[357,1317,-6],[646,1507,4],[850,530,-9],[537,1278,-5],[122,545,4],[569,1346,4],[470,1182,-3],[716,1251,-7],[443,1562,-4],[123,645,4],[859,659,7],[248,1194,5],[768,1559,-7],[396,1244,-3],[123,447,-2],[171,1534,-8],[848,820,-5],[477,608,8],[586,1208,-2],[148,1466,5],[122,374,-2]];
+const stones=[[408,1438,-6],[802,1320,-10],[131,736,3],[357,1317,-6],[646,1507,4],[850,546,-9],[537,1278,-5],[122,545,4],[569,1346,4],[452,1162,-3],[716,1251,-7],[443,1562,-4],[123,645,4],[859,659,7],[248,1194,5],[768,1559,-7],[383,1239,-3],[123,447,-2],[171,1534,-8],[848,820,-5],[477,608,8],[567,1211,-2],[148,1466,5],[122,374,-2]];
 const cuts=[
  'M6 1 L3 2 1 5 1.5 12 4 15 7 14 9 11 8.5 4 6 1',
  'M2 5 L5 2 5.3 9 5 15 M2 15 L8 15',
@@ -146,6 +148,7 @@ function grid(){
     button.style.cssText='left:'+x/971*100+'%;top:'+y/1619*100+'%;--angle:'+angle+'deg;--crop:'+(x-55)/861*100+'% '+(y-34)/1551*100+'%';
     leaf.className='leaf';
     leaf.append(engrave(day));
+    if ([10,17,22].includes(day)) leaf.classList.add('small-engraving');
     button.append(leaf);
     button.onclick=()=>openDoor(day);
     dayGrid.append(button);
