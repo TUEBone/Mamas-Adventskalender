@@ -26,7 +26,7 @@ body:not(.inside) header,body:not(.inside) article>:not(#frame),body:not(.inside
 #art,#scene{display:none}
 #days{display:block;inset:0}
 #days button,#days button:disabled{position:absolute;transform:translate(-50%,-50%);width:11.33%;height:4.2%;min-height:0;border:0;background:none;box-shadow:none;opacity:1}
-#days button .leaf,#days button:disabled .leaf{display:grid;place-items:center;border:0;background:none;color:#4b2d1c;font:bold clamp(15px,2.7dvh,26px) Georgia;transform:rotate(var(--angle));text-shadow:0 1px 1px #ffdfa8;opacity:.94}
+#days button .leaf,#days button:disabled .leaf{display:grid;place-items:center;border:0;background:none;color:#4b2e20b8;font:600 clamp(14px,2.08dvh,21px) Georgia;transform:rotate(var(--angle));text-shadow:0 -.55px .45px #3420149e,0 .8px .35px #ffe8ba9c;opacity:1}
 #days .leaf:after{display:none}
 #days button.opening{background:radial-gradient(ellipse,#fff0b7,#ae763f 52%,#6b4828 72%,transparent 76%)}
 #days button.opening .leaf{background:url(bethlehem.svg) var(--crop)/882.7% 2380.9% no-repeat;border-radius:38%}
@@ -97,7 +97,7 @@ async function returnToCalendar(){
 }
 $('back').onclick=returnToCalendar;
 
-const stones=[[409,1433,-6],[804,1300,-12],[137,736,4],[384,1299,-6],[655,1505,4],[169,1377,-10],[629,1269,-6],[131,550,5],[547,1343,4],[466,1184,-2],[802,1206,-13],[353,1551,-6],[135,630,4],[482,1477,5],[268,1193,6],[702,1448,-6],[429,1240,-3],[530,1558,-2],[189,1533,-8],[788,1387,7],[477,608,8],[587,1211,-2],[278,1494,5],[526,1388,-2]];
+const stones=[[408,1438,-6],[802,1320,-10],[124,746,3],[357,1317,-6],[646,1507,4],[174,1378,-8],[537,1278,-5],[122,545,4],[569,1346,4],[470,1182,-3],[716,1251,-7],[443,1562,-4],[123,645,4],[681,1439,5],[248,1194,5],[768,1559,-7],[396,1244,-3],[123,447,-2],[171,1534,-8],[825,1407,7],[477,608,8],[586,1208,-2],[148,1466,5],[122,374,-2]];
 function grid(){
   dayGrid.replaceChildren();
   stones.forEach(([x,y,angle],index)=>{
