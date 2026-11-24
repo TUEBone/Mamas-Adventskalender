@@ -20,9 +20,9 @@ body:not(.inside) #art{height:clamp(320px,56vw,450px);object-fit:cover}
 body:not(.inside){overflow:hidden}
 body:not(.inside) main,body:not(.inside) article{margin:0;padding:0;max-width:none}
 body:not(.inside) header,body:not(.inside) article>:not(#frame),body:not(.inside) .row,body:not(.inside) footer,.inside #frame,.inside header{display:none}
-#frame{position:fixed;inset:0;width:100%;height:100dvh;margin:0;border-radius:0;background:#1a2234}
+#frame{position:fixed;inset:0;width:100%;height:100dvh;margin:0;border-radius:0;background:linear-gradient(#102344,#1a2234 50%,#4b382f)}
 #stage{position:absolute;top:50%;left:50%;translate:-50% -50%;width:min(100vw,59.9753dvh);aspect-ratio:971/1619;background:center/100% 100% url(bethlehem.svg)}
-@media (orientation:portrait) and (max-width:700px){#stage{width:max(100vw,59.9753dvh)}}
+@media (orientation:portrait) and (max-width:700px){#stage{width:clamp(100vw,59.9753dvh,117vw)}}
 #art,#scene{display:none}
 #days{display:block;inset:0}
 #days button,#days button:disabled{position:absolute;transform:translate(-50%,-50%);width:11.33%;height:4.2%;min-height:0;border:0;background:none;box-shadow:none;opacity:1}
@@ -113,7 +113,7 @@ async function returnToCalendar(){
 }
 $('back').onclick=returnToCalendar;
 
-const stones=[[408,1438,-6],[802,1320,-10],[131,736,3],[357,1317,-6],[646,1507,4],[850,546,-9],[537,1278,-5],[122,545,4],[569,1346,4],[452,1162,-3],[716,1251,-7],[443,1562,-4],[123,645,4],[859,659,7],[248,1194,5],[768,1559,-7],[383,1239,-3],[123,447,-2],[171,1534,-8],[848,820,-5],[477,608,8],[567,1211,-2],[148,1466,5],[122,374,-2]];
+const stones=[[408,1438,-6],[802,1320,-10],[131,736,3],[357,1317,-6],[646,1507,4],[850,546,-9],[537,1278,-5],[122,545,4],[569,1346,4],[452,1162,-3],[716,1251,-7],[443,1562,-4],[123,645,4],[877,660,7],[248,1194,5],[768,1559,-7],[383,1239,-3],[123,447,-2],[171,1534,-8],[868,762,-5],[477,608,8],[567,1211,-2],[148,1466,5],[122,374,-2]];
 const cuts=[
  'M6 1 L3 2 1 5 1.5 12 4 15 7 14 9 11 8.5 4 6 1',
  'M2 5 L5 2 5.3 9 5 15 M2 15 L8 15',
